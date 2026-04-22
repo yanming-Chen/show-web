@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今天抽一句</title>
+<style>
+body {
+margin:0;
+font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", sans-serif;
+background: linear-gradient(#ffe4e6,#fff,#ffedd5);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+.container {
+max-width:420px;
+width:100%;
+background:#fff;
+border-radius:24px;
+padding:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+.title {
+font-size:24px;
+font-weight:bold;
+margin-bottom:16px;
+}
+.quote {
+font-size:20px;
+line-height:1.8;
+white-space:pre-wrap;
+margin-bottom:20px;
+}
+.btns {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+button {
+padding:14px;
+border-radius:16px;
+border:none;
+font-size:16px;
+font-weight:bold;
+}
+.draw {background:#111;color:#fff;}
+.share {background:#10b981;color:#fff;}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="title">今天抽一句</div>
+<div id="quote" class="quote">點一下按鈕</div>
+<div class="btns">
+<button class="draw" onclick="draw()">抽一句</button>
+<button class="share" onclick="share()">分享到 LINE</button>
+</div>
+</div>
+
+<script>
+const quotes = ["假如實際上炸彈真的爆炸了，人們看了之後就會立刻有實體感，所以不需要用「文字」或「言語」描述來傳達。就像這樣，如果人直接行動，就不需要「文字」或「語言」。", "如果用＜言語＞直接表達，就不需要＜文字＞；同樣地，如果用＜行動＞來表達，就不需要＜言語＞。因此，實踐吧！行動吧！", "在＜很會說話＞這方面多多練習吧！這樣，當人聽到你所說的話時，才會得到感動而去做。", "＜一千句話＞不如＜一句令人感動的話＞。那一句話會左右命運。", "＜言語＞的關鍵是「讓人聽懂」。即使是天使，若說得讓人無法聽懂，那句話依然毫無價值。", "觀察對方的心理、內心和臉色來說話吧！", "和小孩子說話時，要說適合他們的話，傳福音時，也要傳達適合那人的福音。一切都是如此。主的話語猶如千金，話語就是祝福。", "人與人的關係取決於如何相處，同樣地，與 神、聖靈、聖子、耶穌的關係也取決於如何相處。", "若攝理史彼此相通，全體合一，就能發揮驚人的力量，即使發生事情也能立刻處理。", "深入禱告時，往往會發現有很多事情都是因＜自己的錯誤＞而引發的。人們通常會認為事情順利是因為＜自己＞的關係，事情不順利是因為＜其他人＞的關係，但也應該要反過來想才對。", "盡可能地和睦相處吧！他們是 神、聖靈和主所愛的人，與弟兄和睦相處就是與三位和主和睦相處。", "＜人＞也是一樣，比起自己獨自生活，當互相產生「人際關係」而一起生活時，會覺得更理想、美麗、神祕及喜悅。", "我們做任何事情時，因為是自己肉眼看到的，所以會陷入自我主觀和自我想法去做。去做時不要以自我主觀和自我想法為中心去做。", "若真心地愛並付出關心，就無法不對話、無法不禱告、無法不感謝。", "運動時若站在主這邊，比賽就會贏，因此會變得大膽又有自信；同樣地，總是要站在主這邊，與主合一來生活，才會變得大膽。", "＜自己的想法＞無法隨「自己的心意」控制。因此要藉由禱告將＜自己的想法＞交給「全能的 神和主」。", "若在弟兄承受痛苦時說出對他有所助益的話，他就會直接按照那句話的內容得到幫助，不用經由任何人。就像這樣，若幫忙禱告，那生命就會立刻得到幫助，而且 神聽到那禱告後也會立刻給予幫助，或吩咐使者給予幫助。所以，為生命禱告吧！", "不論是什麼＜材料＞，若很會「料理」都會成為山珍海味；同樣地，若好好地「構想並表達」就會成為傑作。", "＜言語的表達＞若想做得好，就要「清楚地瞭解」。要「明確地說出來、說到讓對方理解」。", "無論什麼事都要好好表達，才會帥氣又美麗地達成；同樣地，＜生活＞也要以「生活的行為」好好表達，才會美麗、神祕又雄壯地達成。", "話語說要跟＜主＞討論，但自己無法這麼做的時候該怎麼辦呢？那時，憑＜自己＞是做不到的，但如果跟＜所有人＞討論就能做到。 神會「讓人跟別人合作來行動」，藉此達成益處，所以只要跟人討論來做就行了。", "自己要思考，做事的人也要思考並擬定計畫，讓大家能一起加入。 神說：「擬定計畫時要讓聖靈一起做，也要讓安排的人一起做，這樣才會帥氣地興起融合作用。」", "若「所說的話」和三位相合，「想法」也相合，就會和三位連結起來。", "＜言語＞也是越「細膩地表達」，聆聽的人越會被刺激而立刻感受到，會有所體會、得到感動而喜悅、開心並認定", "在對待人或萬物時也要懂得溝通，才能度過有趣、有成就感又有價值的生活，甚至在危險時還能幫助你避開或把你救出來。"];
+let current = "";
+
+function draw(){
+current = quotes[Math.floor(Math.random()*quotes.length)];
+document.getElementById("quote").innerText = current;
+}
+
+async function share(){
+if(!current) return;
+const text = "今天抽一句\n\n"+current;
+
+if(navigator.share){
+await navigator.share({text});
+} else {
+window.open("https://social-plugins.line.me/lineit/share?text="+encodeURIComponent(text));
+}
+}
+</script>
+</body>
+</html>
